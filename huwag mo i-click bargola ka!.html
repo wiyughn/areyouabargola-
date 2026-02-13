@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Shane 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d81b60;
+            --secondary-color: #ff80ab;
+            --bg-color: #fce4ec;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        /* --- HEART OVERLAY BACKGROUND --- */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23d81b60' d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'%2F%3E%3C%2Fsvg%3E");
+            background-size: 60px 60px;
+            animation: floatHearts 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes floatHearts {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(216, 27, 96, 0.15);
+            max-width: 90%;
+            width: 450px;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+        }
+
+        .gif-container img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            position: relative;
+            height: 60px; /* Space for buttons */
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 800;
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            min-width: 100px;
+        }
+
+        #yesBtn {
+            background-color: #2ecc71;
+            color: white;
+            z-index: 10;
+        }
+
+        #yesBtn:hover {
+            background-color: #27ae60;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 6px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        #noBtn {
+            background-color: var(--primary-color);
+            color: white;
+            position: absolute; /* Allows movement */
+            left: 55%; /* Initial position */
+            z-index: 1;
+            transition: top 0.3s ease, left 0.3s ease; /* Smooth movement */
+        }
+
+        /* --- SUCCESS PAGE STYLES --- */
+        #success-message {
+            display: none;
+            text-align: center;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .success-header {
+            color: #d81b60;
+            font-size: 1.8rem;
+            margin: 20px 0;
+            font-weight: 800;
+        }
+
+        .note-card {
+            background-color: #fff0f5;
+            border: 2px dashed var(--secondary-color);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .note-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--secondary-color);
+            display: inline-block;
+            padding-bottom: 3px;
+        }
+
+        .confession-text {
+            font-style: italic;
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .reminders-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .reminders-list li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+
+        .marker {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .important-text {
+            font-weight: 800;
+            color: #d81b60;
+            background-color: #ffeb3b;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.05); opacity: 1;}
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="initial-content">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW9oOHVxem41OGQxMW9rbnhhcTQwN2NpdjFua2U5Njd6Nmo4cXloNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/901mxGLGQN2PyCQpoc/giphy.gif">
+            </div>
+
+            <h1>Hi Shane, will you be my Valentine? 🌹</h1>
+
+            <div class="buttons">
+                <button id="yesBtn" onclick="acceptLove()">YES</button>
+                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">NO</button>
+            </div>
+        </div>
+
+        <div id="success-message">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW9oOHVxem41OGQxMW9rbnhhcTQwN2NpdjFua2U5Njd6Nmo4cXloNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/YdymLnBeyr70rfKqAj/giphy.gif">
+            </div>
+            
+            <h2 class="success-header">YIEEEE SABI NA EH! 💖🥰</h2>
+
+            <div class="note-card">
+                <h3>My Confession:</h3>
+                <p class="confession-text">"Hindi ako pinaka-sweet na tao sa mundo, maalat kasi ako alam mo na yan dahil natikman mo na ako." 🧂😝</p>
+            </div>
+
+            <div class="note-card">
+                <h3>Reminders for the 14th:</h3>
+                <ul class="reminders-list">
+                    <li><span class="marker">👗</span>Wear <span class="important-text">RED</span> (strictly red!!)</li>
+                    <li><span class="marker">⏰</span>Be on time: <span class="important-text">8:00 AM!</span></li>
+                    <li><span class="marker">📍</span>Wait me sa kanto niyo</li>
+                    <li><span class="marker">💅</span>Mag-ayos ka and be ready!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // List of "Paawa" phrases
+        const paawaPhrases = [
+            "No? 🥺",
+            "Sure ka na?",
+            "Luh, why naman?",
+            "Babargolahin kita eh!",
+            "Iiyak ako sige...",
+            "Di mo ko love?",
+            "Pagod na ko tumakbo!",
+            "Click YES na kasi!",
+            "Sige na please?",
+            "Last chance na 'to!",
+            "Bahala ka diyan...",
+            "Masakit na ha!",
+            "Isipin mo mabuti!"
+        ];
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            
+            // Randomly pick a new text for the button
+            const randomIndex = Math.floor(Math.random() * paawaPhrases.length);
+            btn.innerText = paawaPhrases[randomIndex];
+
+            // Calculate random position
+            // We use fixed position to let it move anywhere on screen
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
+            
+            btn.style.position = 'fixed'; // Make it break out of the layout
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function acceptLove() {
+            document.getElementById('initial-content').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            document.body.style.overflow = 'auto'; // Enable scrolling
+            launchConfetti();
+        }
+
+        function launchConfetti() {
+            const colors = ['#d81b60', '#ff80ab', '#ffeb3b', '#2ecc71'];
+            for(let i=0; i<100; i++) {
+                let confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Inject styles for confetti animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

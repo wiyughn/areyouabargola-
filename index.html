@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fce4ec; /* Light pink background */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        h1 {
+            color: #d81b60; /* Deep pink text */
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+        }
+
+        .gif-container img {
+            width: 200px; /* Adjust size of the cute bear/cat */
+            border-radius: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        #yesBtn {
+            background-color: #2ecc71; /* Green color */
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn:hover {
+            background-color: #27ae60;
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #e74c3c; /* Red color */
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: absolute; /* Allows us to move it freely */
+        }
+
+        /* Success Message Style (Hidden by default) */
+        #success-message {
+            display: none;
+            color: #d81b60;
+            font-size: 2rem;
+            margin-top: 20px;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="gif-container" id="gifContainer">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW9oOHVxem41OGQxMW9rbnhhcTQwN2NpdjFua2U5Njd6Nmo4cXloNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/901mxGLGQN2PyCQpoc/giphy.gif">
+        </div>
+
+        <h1 id="question">Will you be my Valentine? 🌹</h1>
+
+        <div class="buttons">
+            <button id="yesBtn" onclick="acceptLove()">Yes</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+
+        <div id="success-message">
+            Yay! See you on the 14th! 💖🥰
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            var x = Math.random() * (window.innerWidth - 100);
+            var y = Math.random() * (window.innerHeight - 50);
+            var btn = document.getElementById('noBtn');
+            
+            // Apply new position
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.position = 'fixed'; // Ensures it moves relative to screen
+        }
+
+        function acceptLove() {
+            // Hide buttons and question
+            document.getElementById('question').style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            
+            // Show success message
+            document.getElementById('success-message').style.display = 'block';
+
+            // Change the GIF to a happy one
+            // You can replace this URL with a happy couple/bear GIF
+            document.querySelector('.gif-container img').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW9oOHVxem41OGQxMW9rbnhhcTQwN2NpdjFua2U5Njd6Nmo4cXloNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vPzbDN4rBxuvtpSpzF/giphy.gif";
+            
+            // Optional: Launch confetti
+            createConfetti();
+        }
+
+        // Simple Confetti Effect
+        function createConfetti() {
+            for(let i=0; i<50; i++) {
+                let confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = ['#ff0', '#f00', '#0f0', '#00f'][Math.floor(Math.random()*4)];
+                confetti.style.animation = `fall ${Math.random() * 2 + 3}s linear`;
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Add confetti animation style dynamically
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                to { transform: translateY(100vh) rotate(720deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>
